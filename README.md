@@ -1,6 +1,6 @@
-# Lookbook Image Automation
+# HR to LR Lookbook Process Automation
 
-This is a guide to transferring High Resolution (HR) Lookbook photos to cropped, resized, <1.5MB images for the Low Resolution (LR) Lookbook.
+This is a guide to automating the process which involves transferring High Resolution (HR) Lookbook photos to cropped, resized, <1.5MB images for the Low Resolution (LR) Lookbook. 
 
 ## **Crop / Resize & Export**
 
