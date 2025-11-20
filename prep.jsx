@@ -6,7 +6,7 @@ var targetWidth = 1281;
 var targetHeight = 1980;
 
 // Prompt user for SKU
-var sku = prompt("Enter the SKU for this batch (e.g., HH-20)", "");
+var sku = prompt("Enter the SKU", "");
 if (!sku) {
     alert("No SKU entered. Exiting script.");
     throw new Error("No SKU entered.");
@@ -60,4 +60,4 @@ for (var i = 0; i < files.length; i++) {
     placeImage(files[i]);
 }
 
-alert("All images placed. Please review each layer & adjust before exporting.");
+alert("All images placed. Please review each layer with the eye tool & make any neccessary adjustments before running the export script.");
