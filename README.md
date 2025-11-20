@@ -1,6 +1,4 @@
-# HR to LR Lookbook Process Automation
-
-A guide to transferring High Resolution Lookbook photos to cropped, resized, <1.5MB images for the Low Resolution Lookbook using Adobe Photoshop. 
+Transferring High Resolution Lookbook photos to cropped, resized, images under 1.5MB for the Low Resolution Lookbook using Adobe Photoshop. 
 
 ## **Crop, Resize & Export using Photoshop**
 
