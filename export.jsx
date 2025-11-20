@@ -4,7 +4,7 @@ app.bringToFront();
 // --- SETTINGS ---
 var jpegQuality = 12; // 0–12, 12 is max quality
 
-// Make sure there is a document open
+// Ensure there is a document open
 if (!app.documents.length) {
     alert("No document open. Please open your preview document first.");
     throw new Error("No document open.");
@@ -19,7 +19,7 @@ if (!outputFolder) {
     throw new Error("No folder selected.");
 }
 
-// --- Hide background layer if it exists ---
+// --- Hide background layer if existing ---
 var bgLayer = null;
 for (var i = 0; i < doc.layers.length; i++) {
     if (doc.layers[i].name.toLowerCase() === "background") {
