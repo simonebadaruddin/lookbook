@@ -6,7 +6,7 @@ var targetWidth = 1281;
 var targetHeight = 1980;
 
 // Prompt user for SKU
-var sku = prompt("Enter the SKU", "");
+var sku = prompt("Enter SKU", "");
 if (!sku) {
     alert("No SKU entered. Exiting script.");
     throw new Error("No SKU entered.");
@@ -23,8 +23,9 @@ if (!files || files.length === 0) {
 var doc = app.documents.add(targetWidth, targetHeight, 72, "Preview Images", NewDocumentMode.RGB, DocumentFill.WHITE);
 
 // Function to place image as smart object
-function placeImage(file) {
-    var layerName = file.name.replace(/\.[^\.]+$/, "");
+function placeImage(file, index) {
+    var baseName = file.name.replace(/\.[^\.]+$/, ""); // remove file extension
+    var layerName = sku + "-" + (index + 1); // e.g., HH-20-1, HH-20-2
 
     // Place embedded image
     var idPlc = charIDToTypeID("Plc ");
@@ -57,7 +58,7 @@ function placeImage(file) {
 
 // Loop through all files
 for (var i = 0; i < files.length; i++) {
-    placeImage(files[i]);
+    placeImage(files[i], i);
 }
 
-alert("All images placed. Please review each layer with the eye tool & make any neccessary adjustments before running the export script.");
+alert("All images placed. Please review each layer & adjust before exporting.");
