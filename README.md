@@ -4,7 +4,7 @@ This is a guide to automating the process which involves transferring High Resol
 
 ## **Crop / Resize & Export**
 
-This section outlines the process of resizing all images from the HR Lookbook to the Hertrove site size standard (1281px x 1920px) in Adobe Illustrator, using a JavaScript file (**prep.jsx**) to automate the process.
+This section outlines the process of resizing all images from the HR Lookbook to the Hertrove site size standard (1281px x 1920px) in Adobe Photoshop, using a JavaScript file (**prep.jsx**) to automate the process.
 
 ### Step 1:
 
@@ -12,65 +12,37 @@ Download the **prep.jsx** file to your computer
 
 ### Step 2:
 
-Open Adobe Illustrator.
-
-Create a new file in Adobe Illustrator:
-
-Set the # of Artboards to the # of images in the HR Lookbook.
-
-Set the width of Artboard to 1281 px & height to 1920 px (portrait-orientation).
-
-Press create.
-
-### Step 3:
-
-**File** > **Place...** > then select HR Lookbook folder with the images you want to crop / resize / reformat. You will need to click each artboard individually to paste each image.
-
-If images overlap on multiple artboards:
-
-Go to **Object** > **Artboards** > **Rearrange Artboards**
-
-Change the spacing to a larger value such as 2000 px
-
-press **OK**
-
-### Step 4:
+Open Adobe Photoshop.
 
 Go to **File** > **Scripts** > **Other Script...** > select **prep.jsx**
 
-You should see each image resized and centered to each artboard individually
+Follow the instruction in window, using the hide tool to see each image, adjusting it to the frame if needed.
 
-### Step 5:
+### Step 3:
 
-Make any shifts in alignment for your images if needed until satisfied with the arrangement
+Go to **File** > **Scripts** > **Other Script...** > select **export.jsx**
 
-### Step 6:
-
-Go to **File** > **Export** > **Export for Screens...**
-
-In the "**Export to:**" section, choose the file path to the folder in which you want to save all the reformatted images (you can select this manually by clicking on the folder icon).
-
-Make sure to change the format to **JPG 100** in the **Formats: Format** section
+Follow the instruction in window, creating a file for the finalized images to be stored.
 
 ## **Resize**
-The portion of code is included can be copied and pasted into your computer's terminal to make sure all images are below 1.5 MB.
+Copy & paste the following code into your computer's terminal to ensure all images stay below 1.5 MB.
 
 ### Step 1:
 
-Open your computer's terminal (You may have to go to **Applications** \> **Terminal**)
+Open your computer's terminal (**Applications** \> **Terminal**)
 
 ### Step 2:
 
-Navigate to the folder in which you placed all your new files.
+Navigate to the folder in which you placed your new images.
 
 ### Step 3:
-Copy and paste the following code into the terminal and hit enter (Note: You can ignore the following error message if it appears "_The convert command is deprecated in IMv7, use 'magick' instead of 'convert' or 'magick convert' is OKAY_"):
+Copy and paste the following code into the terminal & hit enter 
 
 
 **mkdir compressed**
 
   **for f in \*.jpg; do**
 
-**convert "\$f" -define jpeg:extent=1500kb "compressed/\$f"**
+**magick convert "\$f" -define jpeg:extent=1500kb "compressed/\$f"**
 
 **done**
