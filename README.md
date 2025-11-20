@@ -6,7 +6,7 @@ A guide to transferring High Resolution Lookbook photos to cropped, resized, <1.
 
 ### Step 1:
 
-Download the **prep.jsx** file to your computer.
+Download the **prep.jsx** and **export.jsx** files to your computer.
 
 ### Step 2:
 
