@@ -12,13 +12,14 @@ Open Photoshop.
 
 Go to **File** > **Scripts** > **Browse...** > select **prep.jsx**
 
-Follow the instruction in the window, using the hide layer visibility icon to view each image, adjusting it to the artboard as needed.
+Follow the instructions in the window.
 
 ### Step 3:
 
 Go to **File** > **Scripts** > **Browse...** > select **export.jsx**
 
-Follow the instruction in the window, creating a folder for the adjusted images to be stored.
+Follow the instructions in the window.
+
 
 ## **Keep Below Size Limit Using the Terminal**
 
