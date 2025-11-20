@@ -4,7 +4,7 @@ Transferring High Resolution Lookbook photos to cropped, resized, images under 1
 
 ### Step 1:
 
-Download the **prep.jsx** and **export.jsx** files to your computer.
+Download **prep.jsx** & **export.jsx** files to your computer.
 
 ### Step 2:
 
@@ -18,10 +18,9 @@ Follow the instruction in the window, using the hide layer visibility icon to vi
 
 Go to **File** > **Scripts** > **Other Script...** > select **export.jsx**
 
-Follow the instruction in the window, creating a file for the finalized images to be stored.
+Follow the instruction in the window, creating a folder for the adjusted images to be stored.
 
-## **Keep Below Size Limit Using the Computer Terminal**
-Copy & paste the following code into your computer's terminal to ensure all images stay below 1.5 MB.
+## **Keep Below Size Limit Using the Terminal**
 
 ### Step 1:
 
@@ -33,7 +32,6 @@ Navigate to the folder in which you placed your new images.
 
 ### Step 3:
 Copy and paste the following code into the terminal & hit enter: 
-
 
      mkdir compressed
 
