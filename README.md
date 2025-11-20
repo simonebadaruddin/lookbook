@@ -10,13 +10,13 @@ Download **prep.jsx** & **export.jsx** files to your computer.
 
 Open Photoshop.
 
-Go to **File** > **Scripts** > **Other Script...** > select **prep.jsx**
+Go to **File** > **Scripts** > **Browse...** > select **prep.jsx**
 
 Follow the instruction in the window, using the hide layer visibility icon to view each image, adjusting it to the artboard as needed.
 
 ### Step 3:
 
-Go to **File** > **Scripts** > **Other Script...** > select **export.jsx**
+Go to **File** > **Scripts** > **Browse...** > select **export.jsx**
 
 Follow the instruction in the window, creating a folder for the adjusted images to be stored.
 
