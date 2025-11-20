@@ -1,10 +1,14 @@
 #target photoshop
 app.bringToFront();
 
-// --- SETTINGS ---
-var jpegQuality = 12; // 0–12, 12 is max quality
+/*
+export.jsx - Revised
+Creates a parent folder chosen by user, creates subfolders for each item,
+exports each non-background layer into the item's subfolder using the layer name.
+*/
 
-// Make sure there is a document open
+var jpegQuality = 12; // 0–12
+
 if (!app.documents.length) {
     alert("No document open. Please open your preview document first.");
     throw new Error("No document open.");
@@ -12,14 +16,14 @@ if (!app.documents.length) {
 
 var doc = app.activeDocument;
 
-// Ask user where to save exported JPGs
-var outputFolder = Folder.selectDialog("Select folder to save JPGs");
+// Ask user where to save exported JPGs (parent folder)
+var outputFolder = Folder.selectDialog("Select parent folder to save JPGs (a subfolder will be created for each item)");
 if (!outputFolder) {
     alert("No folder selected. Exiting script.");
     throw new Error("No folder selected.");
 }
 
-// --- Hide background layer if it exists ---
+// Optionally detect a background named "Background" and hide it during exports
 var bgLayer = null;
 for (var i = 0; i < doc.layers.length; i++) {
     if (doc.layers[i].name.toLowerCase() === "background") {
@@ -29,24 +33,43 @@ for (var i = 0; i < doc.layers.length; i++) {
     }
 }
 
-// Loop through layers
+// Helper to extract item number from layer name
+// Expecting names like: DESIGNER-SEASON-ITEM-... e.g., XX-SP24-12345-F or XX-SP24-12345-1
+function extractItemFromName(name) {
+    // split by '-' and take third element if available
+    var parts = name.split('-');
+    if (parts.length >= 3) {
+        return parts[2];
+    } else {
+        return 'UNKNOWN';
+    }
+}
+
+// Loop through layers and export each visible layer into its item's folder
+// We'll iterate through doc.layers in order
 for (var i = 0; i < doc.layers.length; i++) {
     var layer = doc.layers[i];
 
-    // Skip background layer
+    // Skip background if present
     if (layer === bgLayer) continue;
 
-    // Hide all other layers
-    for (var j = 0; j < doc.layers.length; j++) {
-        doc.layers[j].visible = false;
-    }
+    // Hide all layers first
+    for (var j = 0; j < doc.layers.length; j++) doc.layers[j].visible = false;
+
+    // Make this layer visible
     layer.visible = true;
 
-    // Prepare export file
-    var fileName = layer.name + ".jpg"; // layer name already includes SKU
-    var jpgFile = new File(outputFolder + "/" + fileName);
+    // Determine item folder name from layer.name
+    var layerName = layer.name;
+    var item = extractItemFromName(layerName);
+    var itemFolder = new Folder(outputFolder + '/' + item);
+    if (!itemFolder.exists) itemFolder.create();
 
-    // Export visible layer as JPG
+    // Build file name and path
+    var safeName = layerName.replace(/[\/\\:<>?"|*]/g, '_'); // sanitize
+    var jpgFile = new File(itemFolder.fsName + '/' + safeName + '.jpg');
+
+    // Prepare export options
     var jpgOptions = new ExportOptionsSaveForWeb();
     jpgOptions.format = SaveDocumentType.JPEG;
     jpgOptions.includeProfile = false;
@@ -54,10 +77,18 @@ for (var i = 0; i < doc.layers.length; i++) {
     jpgOptions.optimized = true;
     jpgOptions.quality = jpegQuality;
 
-    doc.exportDocument(jpgFile, ExportType.SAVEFORWEB, jpgOptions);
+    // Export
+    try {
+        doc.exportDocument(jpgFile, ExportType.SAVEFORWEB, jpgOptions);
+    } catch (e) {
+        alert('Error exporting layer "' + layerName + '": ' + e.message);
+    }
 }
 
-// --- Open the folder automatically ---
-outputFolder.execute();
+// Re-show all layers (optional)
+for (var k = 0; k < doc.layers.length; k++) doc.layers[k].visible = true;
 
-alert("All layers exported successfully and folder opened.");
+// Optionally open parent folder
+try { outputFolder.execute(); } catch (e) { /* ignore */ }
+
+alert('All layers exported (organized by item) and parent folder opened.');
