@@ -1,3 +1,5 @@
+Note: Newly added file **resize.jsx** resizes files without renaming.
+
 Transferring High Resolution Lookbook photos to cropped, resized, images under 1.5MB for the Low Resolution Lookbook using Adobe Photoshop. 
 
 ## **Crop, Resize & Export using Photoshop**
