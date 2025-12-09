@@ -1,6 +1,6 @@
 # Note: Newly added files **resize.jsx** and **exportn.jsx** 
-Use resize.jsx first, then exportn.jsx to resize and export without needing to rename
-
+- Use resize.jsx first, then exportn.jsx to resize and export without needing to rename
+##
 
 
 
