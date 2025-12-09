@@ -1,5 +1,4 @@
-# Note: Newly added files **resize.jsx** and **exportn.jsx** resize and export files without renaming.
-# - Use resize.jsx first, then exportn.jsx
+# Note: Newly added files **resize.jsx** and **exportn.jsx** resize and export files without renaming. ( Use resize.jsx first, then exportn.jsx )
 
 Transferring High Resolution Lookbook photos to cropped, resized, images under 1.5MB for the Low Resolution Lookbook using Adobe Photoshop. 
 
