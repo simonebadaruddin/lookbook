@@ -10,7 +10,10 @@ Open your computer's terminal (**Applications** \> **Terminal**)
 
 ### Step 2:
 
-Navigate to the folder in which you placed your new images.
+Navigate to the folder in which you placed your new images. 
+Do this by using the "cd" command followed by the path to the folder in which your photos are saved
+
+     cd path/to/file
 
 ### Step 3:
 Copy and paste the following code into the terminal & hit enter: 
@@ -22,3 +25,5 @@ Copy and paste the following code into the terminal & hit enter:
      magick convert "\$f" -define jpeg:extent=1500kb "compressed/\$f"
 
      done
+
+
