@@ -29,6 +29,13 @@ for (var j = 0; j < docsToExport.length; j++) {
     // Make sure the document is active
     app.activeDocument = doc;
 
+    // OPTIONAL FOR FILE COMPRESSION
+    // Convert to sRGB for smaller + consistent exports
+    try {
+        doc.convertProfile("sRGB IEC61966-2.1", Intent.PERCEPTUAL, true, true);
+    } catch (e) {}
+
+
     // Get clean filename
     var rawName = doc.name;
     var dotIndex = rawName.lastIndexOf(".");
@@ -46,7 +53,12 @@ for (var j = 0; j < docsToExport.length; j++) {
         doc.saveAs(saveFile, pngOpts, true, Extension.LOWERCASE);
     } else { // JPG
         var jpgOpts = new JPEGSaveOptions();
-        jpgOpts.quality = 12;
+        jpgOpts.quality = 8;       // CAN BE 12 FOR HIGHER QUALITY
+
+        // OPTIONAL FOR FILE COMPRESSION
+        jpgOpts.optimized = true;     // better compression
+        jpgOpts.embedColorProfile = false;
+        
         doc.saveAs(saveFile, jpgOpts, true, Extension.LOWERCASE);
     }
 
