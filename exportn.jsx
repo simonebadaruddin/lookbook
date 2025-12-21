@@ -4,7 +4,7 @@ app.bringToFront();
 // --- CHECK FOR OPEN DOCUMENTS ---
 if (app.documents.length === 0) {
     alert("No open documents to export.");
-    throw new Error("No open documents to export."); 
+    throw new Error("No open documents to export.");
 }
 
 // --- CHOOSE EXPORT FOLDER ---
@@ -16,7 +16,7 @@ if (!exportFolder) {
 
 var exportPath = exportFolder.fsName;
 
-// --- BUILD STATIC LIST OF DOCUMENTS ---
+// --- BUILD STATIC LIST OF DOCUMENTS (CRITICAL) ---
 var docsToExport = [];
 for (var i = 0; i < app.documents.length; i++) {
     docsToExport.push(app.documents[i]);
@@ -25,46 +25,39 @@ for (var i = 0; i < app.documents.length; i++) {
 // --- EXPORT DOCUMENTS ---
 for (var j = 0; j < docsToExport.length; j++) {
     var doc = docsToExport[j];
-
-    // Make sure the document is active
     app.activeDocument = doc;
 
-    // OPTIONAL FOR FILE COMPRESSION
-    // Convert to sRGB for smaller + consistent exports
+    // Convert to sRGB for smaller, consistent web files
     try {
         doc.convertProfile("sRGB IEC61966-2.1", Intent.PERCEPTUAL, true, true);
     } catch (e) {}
 
+    // Base filename (resize.jsx creates names with no extension)
+    var baseName = doc.name;
+    var ext = "jpg";
 
-    // Get clean filename
-    var rawName = doc.name;
-    var dotIndex = rawName.lastIndexOf(".");
-    var baseName = (dotIndex > -1) ? rawName.substring(0, dotIndex) : rawName;
-    var ext = (dotIndex > -1) ? rawName.substring(dotIndex + 1).toLowerCase() : "jpg";
+    // FORCE UNIQUE FILENAMES (prevents overwrite)
+    var saveFile = File(
+        exportPath + "/" + baseName + "_" + (j + 1) + "." + ext
+    );
 
-    if (ext === "jpeg") ext = "jpg";
-    if (ext !== "jpg" && ext !== "png") ext = "jpg";
+    // JPEG COMPRESSION SETTINGS
+    var jpgOpts = new JPEGSaveOptions();
+    jpgOpts.quality = 8;              // 6–8 keeps under ~1.5MB
+    jpgOpts.optimized = true;         // better compression
+    jpgOpts.embedColorProfile = false;
 
-    var saveFile = File(exportPath + "/" + baseName + "." + ext);
-
-    if (ext === "png") {
-        var pngOpts = new PNGSaveOptions();
-        pngOpts.interlaced = false;
-        doc.saveAs(saveFile, pngOpts, true, Extension.LOWERCASE);
-    } else { // JPG
-        var jpgOpts = new JPEGSaveOptions();
-        jpgOpts.quality = 8;       // CAN BE 12 FOR HIGHER QUALITY
-
-        // OPTIONAL FOR FILE COMPRESSION
-        jpgOpts.optimized = true;     // better compression
-        jpgOpts.embedColorProfile = false;
-        
-        doc.saveAs(saveFile, jpgOpts, true, Extension.LOWERCASE);
-    }
+    // SAVE
+    doc.saveAs(saveFile, jpgOpts, true, Extension.LOWERCASE);
 
     if (!saveFile.exists) {
-        alert("⚠ Failed to save: " + saveFile.fsName);
+        alert("⚠ Failed to save:\n" + saveFile.fsName);
     }
 }
 
-alert("All open documents exported to:\n" + exportPath);
+// --- CLOSE ALL OPEN DOCUMENTS (NO SAVE) ---
+while (app.documents.length > 0) {
+    app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+}
+
+alert("Export complete.\nAll documents have been closed.\n\nFiles saved to:\n" + exportPath);
