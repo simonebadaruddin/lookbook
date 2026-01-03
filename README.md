@@ -1,6 +1,6 @@
 # NEW Jewelry usage
-**prepjewel.jsx** and **exportjewel.jsx** 
-- Use prepjewel.jsx first, then exportjewel.jsx to resize and export without needing to rename
+**jewelresize.jsx** 
+- Use jewelresize.jsx first, then export artboards from Photoshop directly
 - Proceed to the Final section for maintaining all images are under the 1.5MB limit
 
 # General usage
