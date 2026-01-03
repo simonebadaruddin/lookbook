@@ -1,8 +1,14 @@
-# Note: Newly added files **resize.jsx** and **exportn.jsx** 
+# NEW Jewelry usage
+**prepjewel.jsx** and **exportjewel.jsx** 
+- Use prepjewel.jsx first, then exportjewel.jsx to resize and export without needing to rename
+- Proceed to the Final section for maintaining all images are under the 1.5MB limit
+
+# General usage
+**resize.jsx** and **exportn.jsx** 
 - Use resize.jsx first, then exportn.jsx to resize and export without needing to rename
 - Proceed to the Next section for maintaining all images are under the 1.5MB limit
 ##
-## **Keep Below Size Limit Using the Terminal**
+# **Manually Keep Images Below Size Limit Using the Terminal**
 
 ### Step 1:
 
