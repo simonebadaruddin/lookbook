@@ -3,6 +3,7 @@ app.bringToFront();
 
 /*
 prep_artboards.jsx
+Creates ONE document with ONE ARTBOARD PER IMAGE.
 Each image is placed as an embedded smart object, resized to fill,
 and each artboard is named using designer-season-item-type logic.
 */
